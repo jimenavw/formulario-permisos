@@ -3,22 +3,121 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Formulario Condicional de Permisos</title>
+<title>FORMULARIO CONDICIONAL DE PERMISOS</title>
 <style>
-  body { font-family: Arial, sans-serif; margin: 20px; }
-  h2 { color: #333; }
-  .hidden { display: none; }
-  .section { margin: 15px 0; padding: 10px; border: 1px solid #ccc; border-radius: 6px; background: #f9f9f9; }
-  label { display: block; margin-top: 10px; font-weight: bold; }
-  input, textarea, select { width: 100%; padding: 6px; margin-top: 4px; }
-  button { margin-top: 20px; padding: 10px 20px; font-size: 16px; cursor: pointer; }
-  .result { margin-top: 20px; padding: 15px; border: 2px solid #0073e6; background: #eef7ff; white-space: pre-wrap; }
-  .description { font-size: 14px; color: #555; margin-bottom: 8px; }
+  :root {
+    --color-fondo: #008C82;
+    --color-acento: #ffffff;
+    --color-texto-claro: #ffffff;
+    --color-gris: #f9f9f9;
+    --color-warning-bg: #fff3cd;
+    --color-warning-border: #ffeeba;
+    --color-info-bg: #eef7ff;
+    --color-info-border: #0073e6;
+    --color-texto: #008C82;
+    --color-button: #66BAB4;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: var(--color-fondo);
+    color: var(--color-texto-claro);
+  }
+
+  h1 {
+    color: var(--color-acento);
+    text-align: center;
+  }
+
+  h2 {
+    color: var(--color-texto);
+    text-align: center;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .section {
+    margin: 15px 0;
+    padding: 15px;
+    border: 1px solid var(--color-acento);
+    border-radius: 6px;
+    background-color: var(--color-gris);
+    color: #000;
+  }
+
+  .warning {
+    background-color: var(--color-warning-bg);
+    border-color: var(--color-warning-border);
+    color: #000;
+    font-weight: bold;
+  }
+
+  label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: inherit;
+  }
+
+  input, textarea, select {
+    width: 100%;
+    padding: 6px;
+    margin-top: 4px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: var(--color-button);
+    color: var(--color-texto-claro);
+    border: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  button:hover {
+    background-color: #66BAB4;
+  }
+
+  .result {
+    margin-top: 20px;
+    padding: 15px;
+    border: 2px solid var(--color-info-border);
+    background: var(--color-info-bg);
+    white-space: pre-wrap;
+    color: #000;
+    border-radius: 6px;
+  }
+
+  .description {
+    font-size: 14px;
+    color: var(--color-fondo);
+    margin-top: 10px;
+  }
+
+  .copilot-section {
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: var(--color-gris);
+    border-radius: 6px;
+    color: #000;
+  }
 </style>
 </head>
 <body>
 
-<h2>Formulario Condicional de Permisos</h2>
+<h1>FORMULARIO CONDICIONAL DE PERMISOS</h1>
 
 <!-- Selección principal -->
 <div class="section">
@@ -28,6 +127,7 @@
     <option value="regular">Permiso Regular / Permiso de Desviación</option>
     <option value="eilt">Permiso Eilt Sehr</option>
     <option value="notfall">Notfall</option>
+    <option value="doc">Ya tengo el documento</option>
   </select>
 
   <div id="descripcion" class="description hidden"></div>
@@ -36,63 +136,101 @@
 <!-- Formulario Condicional -->
 <div id="formulario" class="hidden">
 
+  <!-- Mensaje adicional -->
+  <div class="section warning">
+    <strong>Coloca 'NA' si es que algo no aplica</strong>
+  </div>
+
+  <!-- Mensaje para evitar abreviaturas-->
+   <div class="section warning">
+    <strong>Evita abreviaturas; si las usas, defínelas la primera vez</strong>
+  </div>
+
   <!-- PROBLEMA -->
   <div class="section">
-    <h3>PROBLEMA</h3>
+    <h2>PROBLEMA</h2>
+
     <label>Necesidades:</label>
     <input type="text" id="necesidades">
 
     <label>Proyecto:</label>
     <input type="text" id="proyecto">
 
-    <label>NP Afectado:</label>
+    <label>NP Afectado y Ubicación:</label>
     <input type="text" id="np">
 
     <label>¿Cuándo debe entrar la desviación?</label>
     <input type="text" id="fecha">
 
-    <label>¿Qué está pasando? (Especificar claramente):</label>
+    <label>¿Qué está pasando? Especificar claramente. Por ejemplo: Hay escasez de 'x' material, entonces no se puede construir 'y' ensamble. Haz que sea lo más claro posible)</label>
     <textarea id="quePasa"></textarea>
+
+    <label>¿Es un problema técnico en el vehículo? Especifica qué es</label>
+    <input type="text" id="tecnico">
+
+    <label>Particularidades extra (Como restricciones a ciertos vehículos o razones específicas para la adición)</label>
+    <input type="text" id="particularidades">
+
+    <label>¿En qué parte del proceso se detectó el problema? (Por ejemplo: En una auditoría / falla de campo)</label>
+    <textarea id="donde"></textarea>
+
   </div>
 
   <!-- CAUSA -->
   <div class="section">
-    <h3>CAUSA</h3>
-    <label>¿Qué provocó el problema? (Explicar claramente):</label>
+    <h2>CAUSA</h2>
+    <label>¿Qué/quién provocó el problema?</label>
     <textarea id="causa"></textarea>
   </div>
 
   <!-- MEDIDA -->
   <div class="section">
-    <h3>MEDIDA</h3>
-    <label>Solución propuesta:</label>
-    <textarea id="solucion"></textarea>
+    <h2>MEDIDA</h2>
 
-    <label>¿Qué propones para no parar la línea?</label>
+    <label>¿Qué propones para no parar la línea? (Por ejemplo: Utilizar una pieza en lugar de otra)</label>
     <textarea id="propuesta"></textarea>
 
-    <label>¿Qué pasaría si no se implementa esta desviación?</label>
+    <label>¿Qué pasaría si no se implementa esta desviación? (Por ejemplo: "Para evitar el paro de línea, se utilizaría 'x' pieza de 'y' proveedor)</label>
     <textarea id="consecuencia"></textarea>
 
-    <label>¿Quién realiza dicha medida?</label>
+    <label>¿Quién realiza dicha medida? (Por ejemplo: Proveedor, se hará en casa, etc.)</label>
     <input type="text" id="responsable">
 
-    <!-- Extra preguntas para Notfall -->
+    <label>Si genera costos, ¿quién los cubrirá?</label>
+    <input type="text" id="cost">
+
+    <label>En permisos con motivo "Falta la liberación K & BMG", documenta: Conformidad legal, seguridad y adecuación al mercado del componente</label>
+    <input type="text" id="legal">
+
+  </div>
+
+  <div class="section">
     <div id="notfallExtras" class="hidden">
-      <h4>Preguntas adicionales para Notfall</h4>
+    <h2>PREGUNTAS DE CONTROL NOTFALL</h2>
+
       <label>¿Ya se implementó la instalación alternativa?</label>
       <input type="text" id="instalacionAlt">
 
       <label>¿Existe una fecha claramente definida para la construcción alternativa?</label>
       <input type="text" id="fechaAlt">
 
-      <label>¿Puede implementarse el apuntalamiento alternativo lo antes posible después de la aprobación?</label>
+      <label>¿Puede implementarse el apuntalamiento alternativo lo antes posible antes de la aprobación?</label>
       <input type="text" id="apuntalamiento">
     </div>
-  </div>
+    </div>
+  
 
   <!-- BOTÓN RESULTADO -->
   <button onclick="generarResumen()">Generar y Copiar Prompt</button>
+
+</div>
+
+<!-- Sección Copilot (ahora más visible) -->
+<div id="copilotSection" class="copilot-section hidden">
+  <button onclick="enviarACopilot()" id="botonCopilot">🚀 Ir a Microsoft Copilot</button>
+  <p id="mensajeCopilot" class="description">
+    ✅ El prompt fue copiado. <strong>Haz clic en el botón de arriba</strong> o ve a Microsoft Copilot y presiona <strong>Ctrl + V</strong> para pegarlo.
+  </p>
 </div>
 
 <!-- RESULTADO -->
@@ -118,22 +256,19 @@ const promptBase = `Todos los permisos deben cumplir con los siguientes requisit
 • La descripción del problema debe ser clara, completa y comprensible, incluso para personas ajenas al tema.
 • Evitar abreviaturas o escribirlas completas la primera vez.
 • Incluir particularidades como restricciones a ciertos vehículos o razones específicas para la adición.
-• Indicar el desencadenante del problema: dónde/cuándo se detectó (p. ej. análisis DMU, prueba de construcción, etc.).
-• Para sociedades chinas externas (JV), revisar el campo correspondiente.
+• Indicar el desencadenante del problema: dónde/cuándo se detectó (p. ej. análisis DMU, prueba de construcción, etc.)
 2. Causa (Cause):
 • Explicar quién o qué causó el problema, y dónde ocurrió.
 • La causa debe estar descrita de forma clara, completa y comprensible.
-• Para sociedades chinas externas (JV) chinas, revisar el nombre del campo externo.
 3. Medida (Measure):
 • Las acciones para resolver el problema deben estar descritas claramente y con todos los detalles necesarios.
 • Debe indicarse quién realizará la medida (proveedor o producción) y en qué parte del vehículo.
+  Si genera costos, debe mencionar quién los cubrirá (qué departamento o área)
 • La medida debe ser un cambio técnico obligatorio.
 • En permisos con motivo "Falta la autorización K", se deben documentar:
   o Conformidad legal, seguridad y adecuación al mercado del componente.
-• Para aprobaciones en obra 11/12:
-  o Describir inicio de validez concreto.
-  o Cumplir con OA 700-3.
-  o En casos de lectura de errores, detallar impactos al cliente.
+
+Si en algún apartado del texto aparece 'NA', se considerará como 'no aplica' y ese criterio será ignorado para la revisión.
 
 A continuación, recibirás un texto. Tu tarea será identificar qué elementos obligatorios faltan, en función del tipo de permiso. No completes ni inventes datos. Solo identifica las ausencias.
 Tu salida deberá presentarse en formato de tabla, con los siguientes idiomas:
@@ -148,36 +283,106 @@ function mostrarFormulario() {
   const desc = document.getElementById('descripcion');
   const form = document.getElementById('formulario');
   const extras = document.getElementById('notfallExtras');
+  const copilotSection = document.getElementById('copilotSection');
+  const resultado = document.getElementById('resultado');
 
-  if (tipo) {
-    desc.textContent = descripciones[tipo];
+  if (tipo === "doc") {
+    // Oculta formulario y descripción
+    desc.classList.add('hidden');
+    form.classList.add('hidden');
+
+    // Muestra prompt directamente
+    const fullText = promptBase + "[Pega aquí tu texto ya generado...]";
+    resultado.textContent = fullText;
+    resultado.classList.remove('hidden');
+
+    // Mostrar sección Copilot
+    copilotSection.classList.remove('hidden');
+
+    // Copiar automáticamente
+    navigator.clipboard.writeText(fullText).then(() => {
+      alert("✅ Prompt copiado automáticamente. Ahora haz clic en el botón o ve a Copilot y presiona Ctrl + V.");
+    }).catch(() => {
+      alert("❌ No se pudo copiar automáticamente. Copia manualmente.");
+    });
+  } else if (tipo) {
+    desc.textContent = descripciones[tipo] || "";
     desc.classList.remove('hidden');
     form.classList.remove('hidden');
     extras.classList.toggle('hidden', tipo !== 'notfall');
+
+    // Ocultar elementos específicos del caso "doc"
+    copilotSection.classList.add('hidden');
+    resultado.classList.add('hidden');
   } else {
+    // Reinicia todo si no se selecciona nada
     desc.classList.add('hidden');
     form.classList.add('hidden');
+    extras.classList.add('hidden');
+    copilotSection.classList.add('hidden');
+    resultado.classList.add('hidden');
   }
 }
 
 function generarResumen() {
   const tipo = document.getElementById('permiso').value;
+  if (tipo === "doc") return;
+  
+  // Validar campos obligatorios
+  const camposObligatorios = [
+    { id: 'necesidades', nombre: 'Necesidades' },
+    { id: 'proyecto', nombre: 'Proyecto' },
+    { id: 'np', nombre: 'NP Afectado y Ubicación' },
+    { id: 'fecha', nombre: 'Fecha' },
+    { id: 'quePasa', nombre: '¿Qué está pasando?' },
+    { id: 'tecnico', nombre: 'Problema técnico' },
+    { id: 'particularidades', nombre: 'Particularidades extra' },
+    { id: 'donde', nombre: '¿Dónde se detectó el problema?' },
+    { id: 'causa', nombre: '¿Qué/quién provocó el problema?' },
+    { id: 'propuesta', nombre: '¿Qué propones para no parar la línea?' },
+    { id: 'consecuencia', nombre: '¿Qué pasaría si no se implementa esta desviación?' },
+    { id: 'responsable', nombre: '¿Quién realiza dicha medida?' }
+  ];
+
+  if (tipo === 'notfall') {
+    camposObligatorios.push(
+      { id: 'instalacionAlt', nombre: '¿Ya se implementó la instalación alternativa?' },
+      { id: 'fechaAlt', nombre: '¿Fecha definida para construcción alternativa?' },
+      { id: 'apuntalamiento', nombre: '¿Puede implementarse el apuntalamiento alternativo?' }
+    );
+  }
+
+  const camposFaltantes = camposObligatorios.filter(campo => {
+    const valor = document.getElementById(campo.id).value.trim();
+    return valor === '';
+  });
+
+  if (camposFaltantes.length > 0) {
+    const listaCampos = camposFaltantes.map(c => `• ${c.nombre}`).join('\n');
+    alert(`⚠️ Por favor completa los siguientes campos obligatorios antes de generar el prompt:\n\n${listaCampos}`);
+    return;
+  }
+
   const necesidades = document.getElementById('necesidades').value;
   const proyecto = document.getElementById('proyecto').value;
   const np = document.getElementById('np').value;
   const fecha = document.getElementById('fecha').value;
   const quePasa = document.getElementById('quePasa').value;
+  const particularidades = document.getElementById('particularidades').value;
+  const tecnico = document.getElementById('tecnico').value;
   const causa = document.getElementById('causa').value;
-  const solucion = document.getElementById('solucion').value;
+  const donde = document.getElementById('donde').value;
   const propuesta = document.getElementById('propuesta').value;
   const consecuencia = document.getElementById('consecuencia').value;
   const responsable = document.getElementById('responsable').value;
+  const cost = document.getElementById('cost').value;
+  const legal = document.getElementById('legal').value;
 
   let resumen = `TIPO DE PERMISO: ${tipo.toUpperCase()}\n\n`;
 
-  resumen += `PROBLEMA:\n- Necesidades: ${necesidades}\n- Proyecto: ${proyecto}\n- NP Afectado: ${np}\n- Fecha: ${fecha}\n- Qué está pasando: ${quePasa}\n\n`;
+  resumen += `PROBLEMA:\n- Necesidades: ${necesidades}\n- Proyecto: ${proyecto}\n- NP Afectado: ${np}\n- Fecha: ${fecha}\n- Qué está pasando: ${quePasa}\n- Problema técnico: ${tecnico}\n- Particularidades: ${particularidades}\n-Dónde ocurrió:${donde}\n\n`;
   resumen += `CAUSA:\n${causa}\n\n`;
-  resumen += `MEDIDA:\n- Solución: ${solucion}\n- Propuesta: ${propuesta}\n- Consecuencia: ${consecuencia}\n- Responsable: ${responsable}\n`;
+  resumen += `MEDIDA:\n- Propuesta: ${propuesta}\n- Consecuencia: ${consecuencia}\n- Responsable: ${responsable}\n- Quién cubre los costos: ${cost}\n- Falta autorización K & BMG: ${legal}\n\n`;
 
   if (tipo === 'notfall') {
     const instalacionAlt = document.getElementById('instalacionAlt').value;
@@ -189,18 +394,25 @@ function generarResumen() {
 
   const fullText = promptBase + resumen;
 
-  // Mostrar en pantalla
   const resultBox = document.getElementById('resultado');
   resultBox.textContent = fullText;
   resultBox.classList.remove('hidden');
 
-  // Copiar al portapapeles
+  const copilotSection = document.getElementById('copilotSection');
+  copilotSection.classList.remove('hidden');
+
   navigator.clipboard.writeText(fullText).then(() => {
     alert("✅ Texto copiado al portapapeles.");
   }).catch(err => {
     alert("❌ No se pudo copiar automáticamente. Copia manualmente.");
   });
 }
+
+function enviarACopilot() {
+  window.open("https://copilot.microsoft.com", "_blank");
+}
+
 </script>
+
 </body>
 </html>
