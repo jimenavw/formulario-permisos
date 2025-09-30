@@ -117,166 +117,168 @@
 </head>
 <body>
 
-<h1>FORMULARIO CONDICIONAL DE PERMISOS</h1>
+<h1>PERMITS FORMS</h1>
 
-<!-- Selección principal -->
+<!-- Principal selection -->
 <div class="section">
-  <label for="permiso">Selecciona el tipo de permiso:</label>
+  <label for="permiso">Select the permit type:</label>
   <select id="permiso" onchange="mostrarFormulario()">
-    <option value="">-- Selecciona --</option>
-    <option value="regular">Permiso Regular / Permiso de Desviación</option>
-    <option value="eilt">Permiso Eilt Sehr</option>
+    <option value="">-- Select --</option>
+    <option value="regular">Regular Permit / Deviation Permit</option>
+    <option value="eilt">Eilt Sehr Permit</option>
     <option value="notfall">Notfall</option>
-    <option value="doc">Ya tengo el documento</option>
+    <option value="doc">I already have the document</option>
   </select>
 
   <div id="descripcion" class="description hidden"></div>
 </div>
 
-<!-- Formulario Condicional -->
+<!-- Conditional forms -->
 <div id="formulario" class="hidden">
 
-  <!-- Mensaje adicional -->
+  <!-- Additional message -->
   <div class="section warning">
-    <strong>Coloca 'NA' si es que algo no aplica</strong>
+    <strong>Write 'NA' if not applicable</strong>
   </div>
 
-  <!-- Mensaje para evitar abreviaturas-->
+  <!-- Message to avoid abbreviations-->
    <div class="section warning">
-    <strong>Evita abreviaturas; si las usas, defínelas la primera vez</strong>
+    <strong>Do not use abbreviations unless unavoidable, and define them upon first use.</strong>
   </div>
 
-  <!-- PROBLEMA -->
+  <!-- PROBLEM -->
   <div class="section">
-    <h2>PROBLEMA</h2>
+    <h2>ISSUE</h2>
 
-    <label>Necesidades:</label>
+    <label>Needs:</label>
     <input type="text" id="necesidades">
 
-    <label>Proyecto:</label>
+    <label>Project:</label>
     <input type="text" id="proyecto">
 
-    <label>NP Afectado y Ubicación:</label>
+    <label>Impacted Part Number and Location</label>
     <input type="text" id="np">
 
-    <label>¿Cuándo debe entrar la desviación?</label>
+    <label>When should the deviation be entered?</label>
     <input type="text" id="fecha">
 
-    <label>¿Qué está pasando? Especificar claramente. Por ejemplo: Hay escasez de 'x' material, entonces no se puede construir 'y' ensamble. Haz que sea lo más claro posible)</label>
+    <label>What is happening? Describe the situation clearly. (For example: Material X is unavailable, so assembly Y cannot be produced.) Be as specific as possible</label>
     <textarea id="quePasa"></textarea>
 
-    <label>¿Es un problema técnico en el vehículo? Especifica qué es</label>
+    <label>Is it a technical issue with the vehicle? If so, specify what is it and provide details.</label>
     <input type="text" id="tecnico">
 
-    <label>Particularidades extra (Como restricciones a ciertos vehículos o razones específicas para la adición)</label>
+    <label>Extra particularities (e.g., restrictions on certain vehicles or specific reasons for the addition)</label>
     <input type="text" id="particularidades">
 
-    <label>¿En qué parte del proceso se detectó el problema? (Por ejemplo: En una auditoría / falla de campo)</label>
+    <label>At what stage of the process was the issue detected? (e.g., during a field audit or a failure)</label>
     <textarea id="donde"></textarea>
 
   </div>
 
-  <!-- CAUSA -->
+  <!-- CAUSE -->
   <div class="section">
-    <h2>CAUSA</h2>
-    <label>¿Qué/quién provocó el problema?</label>
+    <h2>CAUSE</h2>
+    <label>Who or what triggered the problem?</label>
     <textarea id="causa"></textarea>
   </div>
 
   <!-- MEDIDA -->
   <div class="section">
-    <h2>MEDIDA</h2>
+    <h2>MEASURE</h2>
 
-    <label>¿Qué propones para no parar la línea? (Por ejemplo: Utilizar una pieza en lugar de otra)</label>
+    <label>What measures do you propose to prevent stopping the production line? (e.g., use one part instead of another)</label>
     <textarea id="propuesta"></textarea>
 
-    <label>¿Qué pasaría si no se implementa esta desviación? (Por ejemplo: "Para evitar el paro de línea, se utilizaría 'x' pieza de 'y' proveedor)</label>
+    <label>What would happen if this deviation is not implemented? (e.g., “To prevent stopping the production line, part X from supplier Y will be used.”)</label>
     <textarea id="consecuencia"></textarea>
 
-    <label>¿Quién realiza dicha medida? (Por ejemplo: Proveedor, se hará en casa, etc.)</label>
+    <label>Who will be in charge of implementing this solution? (e.g., supplier, internal production, etc.)</label>
     <input type="text" id="responsable">
 
-    <label>Si genera costos, ¿quién los cubrirá?</label>
+    <label>If expenses are generated, who will cover them?</label>
     <input type="text" id="cost">
 
-    <label>En permisos con motivo "Falta la liberación K & BMG", documenta: Conformidad legal, seguridad y adecuación al mercado del componente</label>
+    <label>In cases where the motive is “Missing K & BMG release", ensure documentation covers legal conformity, safety, and market suitability of the component.</label>
     <input type="text" id="legal">
 
   </div>
 
   <div class="section">
     <div id="notfallExtras" class="hidden">
-    <h2>PREGUNTAS DE CONTROL NOTFALL</h2>
+    <h2>NOTFALL CONTROL QUESTIONS</h2>
 
-      <label>¿Ya se implementó la instalación alternativa?</label>
+      <label>Has the alternative installation already been implemented?</label>
       <input type="text" id="instalacionAlt">
 
-      <label>¿Existe una fecha claramente definida para la construcción alternativa?</label>
+      <label>Is an exact date established for the alternative installation?</label>
       <input type="text" id="fechaAlt">
 
-      <label>¿Puede implementarse el apuntalamiento alternativo lo antes posible antes de la aprobación?</label>
+      <label>Is it possible to implement the alternative shoring immediately, prior to approval?</label>
       <input type="text" id="apuntalamiento">
     </div>
     </div>
   
 
-  <!-- BOTÓN RESULTADO -->
-  <button onclick="generarResumen()">Generar y Copiar Prompt</button>
+  <!-- RESULT'S BUTTON -->
+  <button onclick="generarResumen()">Generate and Copy Prompt</button>
 
 </div>
 
-<!-- Sección Copilot (ahora más visible) -->
+<!-- Select Copilot -->
 <div id="copilotSection" class="copilot-section hidden">
-  <button onclick="enviarACopilot()" id="botonCopilot">🚀 Ir a Microsoft Copilot</button>
+  <button onclick="enviarACopilot()" id="botonCopilot">🚀 Go to Microsoft Copilot</button>
   <p id="mensajeCopilot" class="description">
-    ✅ El prompt fue copiado. <strong>Haz clic en el botón de arriba</strong> o ve a Microsoft Copilot y presiona <strong>Ctrl + V</strong> para pegarlo.
+    ✅ The prompt has been copied. <strong>Click on the button above</strong> or go to Microsoft Copilot and press <strong>Ctrl + V</strong> to paste it.
   </p>
 </div>
 
-<!-- RESULTADO -->
+<!-- RESULT -->
 <div id="resultado" class="result hidden"></div>
 
 <script>
 const descripciones = {
-  regular: `• No hay riesgo de que el permiso PC8 se expida rápidamente.
-• Necesidad previsible de una desviación.
-• Acontecimiento planificable.
-• Impacto >6 semanas.`,
-  eilt: `• Puede que no sea posible expedir rápidamente el permiso PC8 (<6 semanas).
-• Necesidad ya producida, suceso imprevisible.
-• Requiere acción rápida.`,
-  notfall: `• Proceso PC8 paralizado completamente.
-• Necesidad inmediata de aprobación AE.
-• Peligro inminente.`
+  regular: `• There is no risk of the PC8 permit being issued quickly.
+• Foreseeable need for a deviation
+• Plannable event.
+• Impact >6 weeks.`,
+  eilt: `• It may not be possible to issue the PC8 permit quickly (<6 weeks).
+• Need has already arisen, unforseen event.
+• Requires rapid action.`,
+  notfall: `• PC8 completely halted.
+• Immediate need for AE approval.
+• Imminent danger.`
 };
 
-const promptBase = `Todos los permisos deben cumplir con los siguientes requisitos clave:
-1. Problema (Problem):
-• Debe quedar claro si se trata de un cambio técnico en el vehículo.
-• La descripción del problema debe ser clara, completa y comprensible, incluso para personas ajenas al tema.
-• Evitar abreviaturas o escribirlas completas la primera vez.
-• Incluir particularidades como restricciones a ciertos vehículos o razones específicas para la adición.
-• Indicar el desencadenante del problema: dónde/cuándo se detectó (p. ej. análisis DMU, prueba de construcción, etc.)
-2. Causa (Cause):
-• Explicar quién o qué causó el problema, y dónde ocurrió.
-• La causa debe estar descrita de forma clara, completa y comprensible.
-3. Medida (Measure):
-• Las acciones para resolver el problema deben estar descritas claramente y con todos los detalles necesarios.
-• Debe indicarse quién realizará la medida (proveedor o producción) y en qué parte del vehículo.
-  Si genera costos, debe mencionar quién los cubrirá (qué departamento o área)
-• La medida debe ser un cambio técnico obligatorio.
-• En permisos con motivo "Falta la autorización K", se deben documentar:
-  o Conformidad legal, seguridad y adecuación al mercado del componente.
+const promptBase = `All permits must meet the following key requirements:
+1. Problem:
+• Clearly state whether the change is a techincal modification to the vehicle.
+• Provicde a clear, complete, and understandable description of the problem -- even for non-experts.
+• Avoid abbreviations, or spell them out the first time they appear.
+• Include specific details, such as restrictions on certain vehicles or particular reasons for the addition.
+• Specify the trigger for the problem: where and when it was detected ( e.g., DMU analysis, construction test, etc.)
+2. Cause:
+• Explain who or what caused the issue, and where it occured.
+• The cause must be described in a clear, complete and easily understandable way.
+3. Measure:
+• The proposed solutions must be clearly described and include all necessary details.
+• Specify who will implement this measure (e.g., supplier or production) and indicate the affected part of the vehicle.
+• If expenses aremad, clearly state who will cover them (department or area).
+• The measure must be an obligatory technical change.
+• For the permits with motive "Missing K & BMG release", documentation must include:
+  o Legal conformity, safety, and market suitability of the component.
 
-Si en algún apartado del texto aparece 'NA', se considerará como 'no aplica' y ese criterio será ignorado para la revisión.
+If 'Na' appears in any part of the text, it will be considered as 'not applicable', and that citerion will be exclused from the review.
 
-A continuación, recibirás un texto. Tu tarea será identificar qué elementos obligatorios faltan, en función del tipo de permiso. No completes ni inventes datos. Solo identifica las ausencias.
-Tu salida deberá presentarse en formato de tabla, con los siguientes idiomas:
-• Español
-• Inglés
-• Alemán
+You'll receve a text. Your task is to identify which mandatory elements are missing according to the type of permit.
+Do not add or invent any data - only point out the missing elements.
 
-Texto finalizado:\n`;
+The outcome must be presented on a table format, including the following languages:
+• Spanish
+• English
+• German
+
+Final text:\n`;
 
 function mostrarFormulario() {
   const tipo = document.getElementById('permiso').value;
@@ -330,25 +332,25 @@ function generarResumen() {
   
   // Validar campos obligatorios
   const camposObligatorios = [
-    { id: 'necesidades', nombre: 'Necesidades' },
-    { id: 'proyecto', nombre: 'Proyecto' },
-    { id: 'np', nombre: 'NP Afectado y Ubicación' },
-    { id: 'fecha', nombre: 'Fecha' },
-    { id: 'quePasa', nombre: '¿Qué está pasando?' },
-    { id: 'tecnico', nombre: 'Problema técnico' },
-    { id: 'particularidades', nombre: 'Particularidades extra' },
-    { id: 'donde', nombre: '¿Dónde se detectó el problema?' },
-    { id: 'causa', nombre: '¿Qué/quién provocó el problema?' },
-    { id: 'propuesta', nombre: '¿Qué propones para no parar la línea?' },
-    { id: 'consecuencia', nombre: '¿Qué pasaría si no se implementa esta desviación?' },
-    { id: 'responsable', nombre: '¿Quién realiza dicha medida?' }
+    { id: 'necesidades', nombre: 'Needs' },
+    { id: 'proyecto', nombre: 'Project' },
+    { id: 'np', nombre: 'Affected Part Number and Location' },
+    { id: 'fecha', nombre: 'Date' },
+    { id: 'quePasa', nombre: 'What is happening?' },
+    { id: 'tecnico', nombre: 'Technical issue' },
+    { id: 'particularidades', nombre: 'Extra particularities' },
+    { id: 'donde', nombre: 'Where was the issue detected?' },
+    { id: 'causa', nombre: 'Who or what triggered the problem?' },
+    { id: 'propuesta', nombre: 'What measures do you propose to prevent stopping the production line?' },
+    { id: 'consecuencia', nombre: 'What would happen if this deviation is not implemented?' },
+    { id: 'responsable', nombre: 'Who will be in charge of implementing this solution?' }
   ];
 
   if (tipo === 'notfall') {
     camposObligatorios.push(
-      { id: 'instalacionAlt', nombre: '¿Ya se implementó la instalación alternativa?' },
-      { id: 'fechaAlt', nombre: '¿Fecha definida para construcción alternativa?' },
-      { id: 'apuntalamiento', nombre: '¿Puede implementarse el apuntalamiento alternativo?' }
+      { id: 'instalacionAlt', nombre: 'Has the alternative installation already been implemented?' },
+      { id: 'fechaAlt', nombre: 'Is an exact date establihshed for the alternative installation?' },
+      { id: 'apuntalamiento', nombre: 'Is it possible to implement the alternative shoring immediately?' }
     );
   }
 
@@ -359,7 +361,7 @@ function generarResumen() {
 
   if (camposFaltantes.length > 0) {
     const listaCampos = camposFaltantes.map(c => `• ${c.nombre}`).join('\n');
-    alert(`⚠️ Por favor completa los siguientes campos obligatorios antes de generar el prompt:\n\n${listaCampos}`);
+    alert(`⚠️ Please complete all mandatory fields before generating the prompt:\n\n${listaCampos}`);
     return;
   }
 
@@ -378,18 +380,18 @@ function generarResumen() {
   const cost = document.getElementById('cost').value;
   const legal = document.getElementById('legal').value;
 
-  let resumen = `TIPO DE PERMISO: ${tipo.toUpperCase()}\n\n`;
+  let resumen = `PERMIT TYPE: ${tipo.toUpperCase()}\n\n`;
 
-  resumen += `PROBLEMA:\n- Necesidades: ${necesidades}\n- Proyecto: ${proyecto}\n- NP Afectado: ${np}\n- Fecha: ${fecha}\n- Qué está pasando: ${quePasa}\n- Problema técnico: ${tecnico}\n- Particularidades: ${particularidades}\n-Dónde ocurrió:${donde}\n\n`;
-  resumen += `CAUSA:\n${causa}\n\n`;
-  resumen += `MEDIDA:\n- Propuesta: ${propuesta}\n- Consecuencia: ${consecuencia}\n- Responsable: ${responsable}\n- Quién cubre los costos: ${cost}\n- Falta autorización K & BMG: ${legal}\n\n`;
+  resumen += `PROBLEM:\n- Needs: ${necesidades}\n- Project: ${proyecto}\n- Affected Part Number: ${np}\n- Date: ${fecha}\n- What is happening: ${quePasa}\n- Technical issue: ${tecnico}\n- Particularities: ${particularidades}\n-Where did it happen:${donde}\n\n`;
+  resumen += `CAUSE:\n${causa}\n\n`;
+  resumen += `MEASURE:\n- Proposal: ${propuesta}\n- Consequence: ${consecuencia}\n- Responsible: ${responsable}\n- Who covers the expenses: ${cost}\n- Missing K & BMG release ${legal}\n\n`;
 
   if (tipo === 'notfall') {
     const instalacionAlt = document.getElementById('instalacionAlt').value;
     const fechaAlt = document.getElementById('fechaAlt').value;
     const apuntalamiento = document.getElementById('apuntalamiento').value;
 
-    resumen += `\nPREGUNTAS ADICIONALES:\n- Instalación alternativa: ${instalacionAlt}\n- Fecha definida: ${fechaAlt}\n- Apuntalamiento alternativo posible: ${apuntalamiento}\n`;
+    resumen += `\nADDITIONAL QUESTIONS:\n- Alternative installation: ${instalacionAlt}\n- Defined date: ${fechaAlt}\n- Possible alternative shoring: ${apuntalamiento}\n`;
   }
 
   const fullText = promptBase + resumen;
@@ -402,9 +404,9 @@ function generarResumen() {
   copilotSection.classList.remove('hidden');
 
   navigator.clipboard.writeText(fullText).then(() => {
-    alert("✅ Texto copiado al portapapeles.");
+    alert("✅ Text copied to clipboard.");
   }).catch(err => {
-    alert("❌ No se pudo copiar automáticamente. Copia manualmente.");
+    alert("❌ Could not copy automatically. Copy manually.");
   });
 }
 
